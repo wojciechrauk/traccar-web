@@ -21,6 +21,7 @@ import TableShimmer from '../common/components/TableShimmer';
 import MapCamera from '../map/MapCamera';
 import MapGeofence from '../map/MapGeofence';
 import scheduleReport from './common/scheduleReport';
+import apiUrl from '../common/util/apiUrl';
 import MapScale from '../map/MapScale';
 import { useRestriction } from '../common/util/permissions';
 import CollectionActions from '../settings/components/CollectionActions';
@@ -107,7 +108,7 @@ const PositionsReportPage = () => {
       query.append('geofenceId', geofenceId);
     }
     deviceIds.forEach((deviceId) => query.append('deviceId', deviceId));
-    window.location.assign(`/api/positions/${format}?${query.toString()}`);
+    window.location.assign(apiUrl(`/api/positions/${format}?${query.toString()}`));
   });
 
   const onSchedule = useCatch(async (deviceIds, groupIds, report) => {

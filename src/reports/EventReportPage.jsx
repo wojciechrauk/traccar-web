@@ -23,6 +23,7 @@ import MapGeofence from '../map/MapGeofence';
 import MapPositions from '../map/MapPositions';
 import MapCamera from '../map/MapCamera';
 import scheduleReport from './common/scheduleReport';
+import apiUrl from '../common/util/apiUrl';
 import MapScale from '../map/MapScale';
 import SelectField from '../common/components/SelectField';
 import fetchOrThrow from '../common/util/fetchOrThrow';
@@ -217,7 +218,9 @@ const EventReportPage = () => {
           case 'media':
             return (
               <Link
-                href={`/api/media/${devices[item.deviceId]?.uniqueId}/${item.attributes.file}`}
+                href={apiUrl(
+                  `/api/media/${devices[item.deviceId]?.uniqueId}/${item.attributes.file}`,
+                )}
                 target="_blank"
               >
                 {item.attributes.file}

@@ -10,6 +10,7 @@ import { useTranslation } from '../common/components/LocalizationProvider';
 import { useCatchCallback } from '../reactHelper';
 import BackIcon from '../common/components/BackIcon';
 import fetchOrThrow from '../common/util/fetchOrThrow';
+import apiUrl from '../common/util/apiUrl';
 
 const useStyles = makeStyles()((theme) => ({
   root: {
@@ -67,7 +68,7 @@ const StreamPage = () => {
     if (activeChannel !== null) {
       sendCommand('videoStart', { index: activeChannel });
       const hls = new Hls();
-      hls.loadSource(`/api/stream/${deviceId}/${activeChannel}/live.m3u8`);
+      hls.loadSource(apiUrl(`/api/stream/${deviceId}/${activeChannel}/live.m3u8`));
       hls.attachMedia(videoRef.current);
       hls.on(Events.MANIFEST_PARSED, () => videoRef.current.play());
       hls.on(Events.ERROR, (_, data) => {

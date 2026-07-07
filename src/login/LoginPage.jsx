@@ -36,6 +36,7 @@ import LogoImage from './LogoImage';
 import { useCatch } from '../reactHelper';
 import QrCodeDialog from '../common/components/QrCodeDialog';
 import fetchOrThrow from '../common/util/fetchOrThrow';
+import apiUrl from '../common/util/apiUrl';
 
 const useStyles = makeStyles()((theme) => ({
   options: {
@@ -113,7 +114,7 @@ const LoginPage = () => {
     setFailed(false);
     try {
       const query = `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
-      const response = await fetch('/api/session', {
+      const response = await fetch(apiUrl('/api/session'), {
         method: 'POST',
         body: new URLSearchParams(code.length ? `${query}&code=${code}` : query),
       });
@@ -146,7 +147,7 @@ const LoginPage = () => {
   handleTokenLoginRef.current = handleTokenLogin;
 
   const handleOpenIdLogin = () => {
-    document.location = '/api/session/openid/auth';
+    document.location = apiUrl('/api/session/openid/auth');
   };
 
   useEffect(() => nativePostMessage('authentication'), []);

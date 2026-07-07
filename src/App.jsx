@@ -12,6 +12,7 @@ import MotionController from './main/MotionController';
 import TermsDialog from './common/components/TermsDialog';
 import Loader from './common/components/Loader';
 import fetchOrThrow from './common/util/fetchOrThrow';
+import apiUrl from './common/util/apiUrl';
 
 const useStyles = makeStyles()(() => ({
   page: {
@@ -50,7 +51,7 @@ const App = () => {
   useAsyncTask(
     async ({ signal }) => {
       if (!user) {
-        const response = await fetch('/api/session', { signal });
+        const response = await fetch(apiUrl('/api/session'), { signal });
         if (response.ok) {
           dispatch(sessionActions.updateUser(await response.json()));
         } else {

@@ -4,12 +4,17 @@ import svgr from 'vite-plugin-svgr';
 import { VitePWA } from 'vite-plugin-pwa';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
+// Set VITE_BASE_URL (e.g. "/gps/") when the app is served from a sub-path.
+const base = process.env.VITE_BASE_URL || '/';
+const basePath = base.endsWith('/') ? base.slice(0, -1) : base;
+
 export default defineConfig(() => ({
+  base,
   server: {
     port: 3000,
     proxy: {
-      '/api/socket': 'ws://localhost:8082',
-      '/api': 'http://localhost:8082',
+      [`${basePath}/api/socket`]: 'ws://localhost:8082',
+      [`${basePath}/api`]: 'http://localhost:8082',
     },
   },
   build: {
@@ -22,7 +27,7 @@ export default defineConfig(() => ({
     VitePWA({
       includeAssets: ['favicon.ico', 'apple-touch-icon-180x180.png'],
       workbox: {
-        navigateFallbackDenylist: [/^\/api/],
+        navigateFallbackDenylist: [new RegExp(`^${basePath}/api`)],
         globPatterns: ['**/*.{js,css,html,woff,woff2,mp3}'],
       },
       manifest: {

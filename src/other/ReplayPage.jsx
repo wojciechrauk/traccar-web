@@ -18,6 +18,7 @@ import ReportFilter from '../reports/components/ReportFilter';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import { useCatchCallback } from '../reactHelper';
 import MapCamera from '../map/MapCamera';
+import apiUrl from '../common/util/apiUrl';
 import MapGeofence from '../map/MapGeofence';
 import StatusCard from '../common/components/StatusCard';
 import MapScale from '../map/MapScale';
@@ -169,7 +170,7 @@ const ReplayPage = () => {
 
   const handleDownload = () => {
     const query = new URLSearchParams({ deviceId: selectedDeviceId, from, to });
-    window.location.assign(`/api/positions/kml?${query.toString()}`);
+    window.location.assign(apiUrl(`/api/positions/kml?${query.toString()}`));
   };
 
   return (

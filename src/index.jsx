@@ -23,7 +23,7 @@ root.render(
           <AppThemeProvider>
             <CssBaseline />
             <ServerProvider>
-              <BrowserRouter>
+              <BrowserRouter basename={import.meta.env.BASE_URL}>
                 <Navigation />
               </BrowserRouter>
               <ErrorHandler />

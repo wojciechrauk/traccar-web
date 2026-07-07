@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { Rnd } from 'react-rnd';
+import apiUrl from '../util/apiUrl';
 import {
   Card,
   CardContent,
@@ -184,7 +185,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
             <Card elevation={3} className={classes.card}>
               <CardMedia
                 className={`draggable-header ${deviceImage ? classes.media : ''}`}
-                image={deviceImage && `/api/media/${device.uniqueId}/${deviceImage}`}
+                image={deviceImage && apiUrl(`/api/media/${device.uniqueId}/${deviceImage}`)}
               >
                 <div className={classes.header}>
                   <Typography variant="body2" color="inherit">

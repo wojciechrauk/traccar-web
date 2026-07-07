@@ -9,6 +9,7 @@ import { devicesActions } from './store';
 import { generateLoginToken } from './common/components/NativeInterface';
 import { useLocalization } from './common/components/LocalizationProvider';
 import fetchOrThrow from './common/util/fetchOrThrow';
+import apiUrl from './common/util/apiUrl';
 
 const CombinedReportPage = lazy(() => import('./reports/CombinedReportPage'));
 const PositionsReportPage = lazy(() => import('./reports/PositionsReportPage'));
@@ -88,7 +89,7 @@ const Navigation = () => {
 
       if (searchParams.has('token')) {
         const token = searchParams.get('token');
-        await fetch(`/api/session?token=${encodeURIComponent(token)}`, { signal });
+        await fetch(apiUrl(`/api/session?token=${encodeURIComponent(token)}`), { signal });
         newParams.delete('token');
       }
 

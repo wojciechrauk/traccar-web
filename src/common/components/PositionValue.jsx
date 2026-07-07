@@ -18,6 +18,7 @@ import {
   formatVolume,
   formatConsumption,
 } from '../util/formatter';
+import apiUrl from '../util/apiUrl';
 import { speedToKnots } from '../util/converter';
 import { useAttributePreference, usePreference } from '../util/preferences';
 import { useTranslation } from './LocalizationProvider';
@@ -111,7 +112,7 @@ const PositionValue = ({ position, property, attribute }) => {
     case 'video':
     case 'audio':
       return (
-        <Link href={`/api/media/${device.uniqueId}/${value}`} target="_blank">
+        <Link href={apiUrl(`/api/media/${device.uniqueId}/${value}`)} target="_blank">
           {value}
         </Link>
       );
